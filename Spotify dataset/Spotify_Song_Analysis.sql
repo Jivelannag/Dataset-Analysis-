@@ -15,7 +15,9 @@ FROM Popular_Spotify_Songs pss ;
 SELECT `artist(s)_name` ,COUNT(DISTINCT track_name) as num_track
 FROM Popular_Spotify_Songs pss
 GROUP BY `artist(s)_name`
-ORDER BY COUNT(DISTINCT track_name) DESC;
+ORDER BY num_track DESC
+LIMIT 15;
+
 
 -- ///////////--
 
@@ -39,7 +41,7 @@ ORDER BY types DESC;-- it shows 8 rows. 1 solo - 586 songs, 2 singers - 254 song
  FROM Popular_Spotify_Songs pss;
 
 -- FOR visualisation purpose
-  SELECT types, count(*)
+  SELECT types, count(*) as types
       FROM(
   SELECT track_name,
          CASE WHEN artist_count = 1 THEN 'SOLO'
@@ -70,7 +72,7 @@ ORDER BY types DESC;-- it shows 8 rows. 1 solo - 586 songs, 2 singers - 254 song
 --         Dance Monkey, Sunflower-Spider-Man, Once dance, Stay(with Justin Biber),
 --          Believer, Closer, Starboy
 
-SELECT `artist(s)_name` ,track_name,
+SELECT `artist(s)_name` ,track_name, streams,
 rank () over (order by streams DESC) as top_rank
 FROM Popular_Spotify_Songs pss
 LIMIT 10;
@@ -156,4 +158,26 @@ SELECT track_name, `artist(s)_name`, streams, CAST(CONCAT(released_year,'-',rele
 ORDER BY num_streams_per_day DESC
 LIMIT 5;
 
+-- Want to see the mean of 10 top songs (danceability) 70%
 
+SELECT CEILING(avg(dance_rank)) AS avg_danceability
+    FROM (
+SELECT  Popular_Spotify_Songs.track_name, `artist(s)_name`, `danceability_%` as dance_rank, streams
+FROM Popular_Spotify_Songs
+ORDER BY streams DESC
+LIMIT 10) as subquery;
+
+SELECT `key`, COUNT(*) as total
+FROM Popular_Spotify_Songs
+GROUP BY `key`
+ORDER BY total DESC;
+
+-- TASK: Want to know who is the most popular as an artist by summarizing all stream by each artist
+-- Result: 1th The weeknd, 2d Taylor Swift, 3d Ed Sheeran, 4d Harry Styles, 5 Bad Bunny, 6 Olivia Rodrigo, 7 Eminem, 8 Bruno Mars
+--         9 Arctic Monkey, 10 Imagine Dragons. There is difference in total number of songs between artists.
+--          Some have 5 songs, some have 34 songs. it effects the sum of total streams. Who is more popular?
+--          Who has fewer song, but higher streams or otherwise?
+SELECT Popular_Spotify_Songs.`artist(s)_name`, SUM(Popular_Spotify_Songs.streams) AS TOTAL_STREAMS
+FROM Popular_Spotify_Songs
+GROUP BY `artist(s)_name`
+ORDER BY TOTAL_STREAMS DESC;
