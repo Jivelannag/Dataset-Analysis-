@@ -1,11 +1,31 @@
-1. ABOUT DATASET:
-The data set utilized for this analysis, entitled "Popular_Spotify_Songs.csv," was sourced from the well-respected and widely utilized data science community platform, Kaggle.
-The specific URL for the data set is as follows: https://www.kaggle.com/datasets/arnavvvvv/spotify-music.
+# ABOUT REPOSITORY :file_folder:
 
-3. PURPOSE OF USING DATASET:
-The purpose of procuring this data set was to conduct a data analysis on the most popular songs on Spotify.
+### This repository was created with the express purpose of compiling and storing all of my analyses of various datasets in a single, convenient location. It serves as a central repository where I can easily store,access and review my work.
 
-4. LISENCE:
-This data set was kindly made available to the public under the license known as CC0: Public Domain.
-This license allows for unrestricted use of the data, including both personal and commercial applications,
-subject to the terms and conditions outlined at this link: https://creativecommons.org/publicdomain/zero/1.0/
+#### 1. ABOUT DATASETS:
+ > None of the datasets that will be featured here are my own. Rather, they have been sourced from a variety of places, the most common of which is Kaggle, a well-known platform for data science and machine learning.
+
+ ##### COMMON DATASETS' SOURCES:
+ 1. Kaagle platform
+ 2. Google dataset
+ 3. Unicef datasets
+ 4. NYC opendata
+ 5. Data.gov etc.  
+
+#### 2. PURPOSE OF USING DATASETS:
+> The analyses that I will be presenting on this platform are a reflection of my ongoing journey as a data analyst.
+> Each piece of analysis is a step towards honing my skills, and an opportunity to learn something new.
+
+#### 3. COMMON TYPES OF LISENCE:
+ 1. CC0: Public Domain.
+ 2. Open Database License (ODbL)
+ 3. CC BY-NC-SA 4.0 DEED 
+
+#### 4. CURRENT DATASETS 📚:
+
+|Name|Analysis Tool|Done|
+|---------------------|:--------:|:--------:|
+|Spotify popular songs| SQL| 99%|
+|Electrical vehicle| SQL|99%|
+
+
