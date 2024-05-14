@@ -108,6 +108,25 @@ GROUP BY `Electric Utility`
 ORDER BY num_provider DESC
 LIMIT 10;
 
+-- CASE STATEMENT 이용해서 PIVOT TABLE 만들기
+-- 조건: 각모델이 생산하는 해에 해당하는 등록된 자동차 개수
+
+SELECT `Model Year`,
+       COUNT(IF(Make = 'Nissan',1,NULL)) as NISSAN,
+       COUNT(IF(Make = 'Hyundai',1,NULL)) as HYUNDAI,
+       COUNT(IF(MAKE = 'Tesla',1,NULL)) as TESLA,
+       COUNT(IF(Make = 'Volkswagen',1,NULL)) as VOLKSWAGEN,
+       COUNT(IF(MAKE = 'Chevrolet',1, NULL)) as CHEVROLET,
+       COUNT(IF(MAKE = 'JEEP',1,NULL)) as JEEP
+FROM Electric_Vehicle_Population_Data1
+GROUP BY `Model Year`
+ORDER BY `Model Year` DESC;
+
+-- 위의 query 결과를  확인하기 위한 query
+Select make,count(*)
+from Electric_Vehicle_Population_Data1
+where make = 'tesla'
+and `Model Year` = 2022
 
 
 

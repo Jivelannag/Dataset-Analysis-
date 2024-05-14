@@ -181,3 +181,31 @@ SELECT Popular_Spotify_Songs.`artist(s)_name`, SUM(Popular_Spotify_Songs.streams
 FROM Popular_Spotify_Songs
 GROUP BY `artist(s)_name`
 ORDER BY TOTAL_STREAMS DESC;
+
+-- Making pivot table with case statement.Case 이용해서 pivot table 만들기
+
+SELECT
+    SUM(CASE WHEN `artist(s)_name` = 'The Weeknd' THEN streams ELSE 0 END) as the_weeknd_streams,
+      SUM(CASE WHEN `artist(s)_name` = 'Ed Sheeran' THEN streams ELSE 0 END) as ed_sheeran_streams,
+       SUM(CASE WHEN `artist(s)_name` = 'Taylor Swift' THEN streams ELSE 0 END) as Taylor_Swift_streams
+FROM Popular_Spotify_Songs;
+
+-- 노래들이 나오는 요일 뽑기
+
+SELECT day_of_week, count(*) as days
+       FROM(
+SELECT track_name,date_format(full_date,'%W') as day_of_week
+       FROM(
+SELECT track_name, cast(concat(released_year,'-',released_month,'-',released_day) as date) as full_date
+    FROM Popular_Spotify_Songs) AS full_date_subquery) AS day_of_week_query
+GROUP BY day_of_week;
+
+-- CTE TABLE 활용하기 (CTE 를 쓸 수 있는 실력은 보여주기 위한 QUERY 입니다)
+
+WITH Full_date as (SELECT cast(concat(released_year,'-',released_month,'-',released_day) as date) as full_date
+    FROM Popular_Spotify_Songs)
+
+SELECT date_format(full_date,'%M') AS released_month,COUNT(*) as total_num
+    FROM Full_date
+GROUP BY released_month
+ORDER BY total_num DESC;
