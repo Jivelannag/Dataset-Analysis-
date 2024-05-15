@@ -209,3 +209,25 @@ SELECT date_format(full_date,'%M') AS released_month,COUNT(*) as total_num
     FROM Full_date
 GROUP BY released_month
 ORDER BY total_num DESC;
+
+-- Pct from total dataset of popular song with SELF JOIN
+-- RESULT: We receive prc of popularity of each song from the total streams by artists
+
+SELECT `artist(s)_name` AS artist,track_name,total_streams,streams,ROUND(streams*100/total_streams,2) as prt
+FROM(
+SELECT p2.`artist(s)_name`,p1.track_name,p1.streams,sum(p2.streams) as total_streams
+    FROM Popular_Spotify_Songs p1
+   JOIN Popular_Spotify_Songs P2 ON p1.`artist(s)_name` = P2.`artist(s)_name`
+GROUP BY p2.`artist(s)_name`, p1.streams,p1.track_name) AS self_join_query;
+
+-- The same but grouped by released year
+
+SELECT released_year,`artist(s)_name`,track_name,total_streams,streams,ROUND(streams/total_streams*100,2) as prt_from_whole
+    FROM(
+SELECT pss1.released_year,pss1.`artist(s)_name`,pss1.track_name,pss1.streams,sum(pss2.streams) as total_streams
+    FROM Popular_Spotify_Songs pss1
+   JOIN Popular_Spotify_Songs pss2 ON pss1.released_year = pss2.released_year
+GROUP BY pss1.released_year,pss1.`artist(s)_name`, pss1.track_name, pss1.streams) as pct_query
+ORDER BY 1 DESC
+
+
