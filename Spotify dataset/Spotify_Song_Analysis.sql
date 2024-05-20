@@ -230,4 +230,3 @@ SELECT pss1.released_year,pss1.`artist(s)_name`,pss1.track_name,pss1.streams,sum
 GROUP BY pss1.released_year,pss1.`artist(s)_name`, pss1.track_name, pss1.streams) as pct_query
 ORDER BY 1 DESC
 
-
