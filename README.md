@@ -27,5 +27,6 @@
 |---------------------|:--------:|:--------:|
 |Spotify popular songs| SQL| 99%|
 |Electrical vehicle| SQL|99%|
+| Taxi_Trips_Chicago|SQL|50%|
 
 
